@@ -1,0 +1,14 @@
+.form-floating input {
+  border-color: var(--indigo-600);
+  color: var(--indigo-600);
+}
+
+.form-floating input:focus {
+  border-color: var(--purple-600);
+  color: var(--purple-600);
+  box-shadow: 0 0 0 0.15rem rgba(0, 0, 0, 0.2);
+}
+
+.form-floating input {
+  font-weight: 600;
+}

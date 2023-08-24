@@ -1,0 +1,12 @@
+.buttonLogin {
+  background-color: var(--white);
+  color: var(--indigo-800);
+  font-size: 1.35rem;
+
+  transition: all 0.3s ease-in;
+}
+
+.buttonLogin:hover {
+  background-color: var(--pink-600);
+  color: var(--white);
+}

@@ -1,0 +1,13 @@
+.formRegister {
+  max-width: 650px;
+}
+
+.btnRegister {
+  background-color: var(--indigo-800);
+  color: var(--white);
+}
+
+.btnRegister:hover {
+  background-color: var(--pink-600);
+  color: var(--white);
+}
