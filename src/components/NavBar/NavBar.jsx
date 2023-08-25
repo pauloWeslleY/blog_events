@@ -1,10 +1,18 @@
+import { FaBars } from 'react-icons/fa'
+import { useDispatch, useSelector } from 'react-redux'
+import { MENU_LINKS, MENU_LINKS_LOGIN } from './data/[menu_props]'
+import { NavItem } from './NavItem'
 import './NavBar.css'
 
 export const NavBar = () => {
-  const LINKS = ['Blog', 'About', 'Events']
+  const dispatch = useDispatch()
+
+  const handleLogout = () => {
+    dispatch({ type: 'LOGOUT' })
+  }
 
   return (
-    <nav className="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
+    <nav className="navbar navbar-expand-lg border-bottom border-body" data-bs-theme="dark">
       <div className="container">
         <span className="navbar-brand fw-semibold">Blog Events</span>
         <button
@@ -16,22 +24,27 @@ export const NavBar = () => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span className="navbar-toggler-icon"></span>
+          <FaBars />
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
-            <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="/#">
-                Home
-              </a>
-            </li>
-            {LINKS.map((props, index) => (
-              <li key={index} className="nav-item">
-                <a className="nav-link fw-medium" href="/#">
-                  {props}
-                </a>
-              </li>
-            ))}
+            <NavItem label="Home" path="/" />
+
+            {useSelector(state => state.userLogged) ? (
+              <>
+                {MENU_LINKS_LOGIN.map((props, index) => (
+                  <NavItem key={index} label={props.label} path={props.path} />
+                ))}
+
+                <NavItem label="Sair" onClick={handleLogout} />
+              </>
+            ) : (
+              <>
+                {MENU_LINKS.map((props, index) => (
+                  <NavItem key={index} label={props.label} path={props.path} />
+                ))}
+              </>
+            )}
           </ul>
         </div>
       </div>

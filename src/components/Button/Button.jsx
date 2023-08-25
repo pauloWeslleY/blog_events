@@ -1,7 +1,11 @@
 import './Button.css'
 
-export const Button = ({ title, onClick }) => (
-  <button className="btn fw-medium py-2 w-50 buttonLogin" type="button" onClick={onClick}>
+export const Button = ({ title, className, onClick }) => (
+  <button
+    className={`btn py-2 fw-semibold display-3 buttonHero ${className}`}
+    type="button"
+    onClick={onClick}
+  >
     {title}
   </button>
 )

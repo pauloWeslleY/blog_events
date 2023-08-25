@@ -1,7 +1,3 @@
-.formRegister {
-  max-width: 650px;
-}
-
 .btnRegister {
   background-color: var(--indigo-800);
   color: var(--white);

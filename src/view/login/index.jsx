@@ -1,5 +1,7 @@
 import { useState } from 'react'
+import { Navigate } from 'react-router-dom'
 import { signInWithEmailAndPassword } from 'firebase/auth'
+import { useSelector, useDispatch } from 'react-redux'
 import { auth } from '../../config/firebase'
 import { AlertHero } from '../../components/AlertHero/AlertHero'
 import { InputField } from '../../components/InputField/InputField'
@@ -13,19 +15,25 @@ export function Login() {
   const [password, setPassword] = useState('')
   const [message, setMessage] = useState('')
 
+  const dispatch = useDispatch()
+
   async function SignIn() {
     await signInWithEmailAndPassword(auth, email, password)
       .then(results => {
         setMessage('success')
+        setTimeout(() => {
+          dispatch({ type: 'LOGIN', userEmail: email })
+        }, 2000)
       })
       .catch(err => {
-        // Erro aqui!
         setMessage('erro')
       })
   }
 
   return (
-    <FormControl background="var(--indigo-800)">
+    <FormControl background="var(--indigo-700)">
+      {useSelector(state => state.userLogged) ? <Navigate to="/" /> : null}
+
       <form className="form-signIn d-flex flex-column justify-content-center align-items-center mx-auto text-center">
         <h1 className="h3 mb-3 fw-bold display-6 text-white">Login</h1>
 
@@ -43,7 +51,7 @@ export function Login() {
           value={password}
         />
 
-        <Button title="Sign in" onClick={SignIn} />
+        <Button title="Entrar" onClick={SignIn} />
 
         <div className="messageLogin text-white text-center my-5">
           {message === 'success' && (
@@ -60,7 +68,7 @@ export function Login() {
 
         <div className="optionLogin d-flex gap-2 align-items-center mt-5 mb-3">
           <BtnLink label="Recuperar senha" path="/#" />
-          <span className="text-secondary">{' | '}</span>
+          <span className="text-light">{' | '}</span>
           <BtnLink label="Quero me cadastrar" path="/register" />
         </div>
       </form>

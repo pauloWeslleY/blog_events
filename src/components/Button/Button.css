@@ -1,12 +1,21 @@
-.buttonLogin {
+.buttonHero {
   background-color: var(--white);
   color: var(--indigo-800);
-  font-size: 1.35rem;
+  font-size: 1.25rem;
+  width: 25rem;
 
   transition: all 0.3s ease-in;
 }
 
-.buttonLogin:hover {
-  background-color: var(--pink-600);
+.buttonHero:hover {
+  background-color: var(--rose-700);
   color: var(--white);
+
+  transform: scale(101%);
+}
+
+@media only screen and (max-width: 425px) {
+  .buttonHero {
+    width: 100%;
+  }
 }

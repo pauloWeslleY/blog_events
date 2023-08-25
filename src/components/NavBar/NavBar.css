@@ -1,0 +1,28 @@
+.navbar {
+  background-color: var(--indigo-600);
+}
+
+.navbar button.navbar-toggler {
+  border: 2px solid transparent;
+  color: var(--zinc-300);
+
+  transition: all 0.3s ease-out;
+}
+
+.navbar button.navbar-toggler:focus {
+  box-shadow: none;
+}
+
+.navbar button.navbar-toggler:hover {
+  border: 2px solid var(--zinc-100);
+  color: var(--zinc-100);
+}
+
+.nav-link {
+  color: var(--zinc-300);
+  transition: all 0.3s ease-out;
+}
+
+.nav-link:hover {
+  color: var(--rose-600);
+}

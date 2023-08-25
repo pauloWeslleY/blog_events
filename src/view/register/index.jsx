@@ -3,8 +3,9 @@ import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../config/firebase'
 import { Button } from '../../components/Button/Button'
 import { InputField } from '../../components/InputField/InputField'
-import './register.css'
 import { FormControl } from '../../components/FormControl/FormControl'
+import { NavBar } from '../../components/NavBar/NavBar'
+import './register.css'
 
 export function Register() {
   const [email, setEmail] = useState('')
@@ -49,45 +50,49 @@ export function Register() {
   }
 
   return (
-    <FormControl background="var(--indigo-950)">
-      <form className="formRegister text-center d-flex flex-column justify-content-center align-items-center mx-auto">
-        <h1 className="h3 mb-3 fw-bold display-6 text-white">Cadastro</h1>
+    <>
+      <NavBar />
 
-        <InputField
-          label="Email"
-          type="email"
-          onChange={event => setEmail(event.target.value)}
-          value={email}
-        />
+      <FormControl>
+        <form className="formRegister text-center d-flex flex-column justify-content-center align-items-center mx-auto">
+          <h1 className="h3 mb-3 fw-bold display-6 text-dark">Cadastro</h1>
 
-        <InputField
-          label="Senha"
-          type="password"
-          onChange={event => setPassword(event.target.value)}
-          value={password}
-        />
+          <InputField
+            label="Email"
+            type="email"
+            onChange={event => setEmail(event.target.value)}
+            value={email}
+          />
 
-        {loading ? (
-          <div class="spinner-border text-danger" role="status">
-            <span class="visually-hidden">Loading...</span>
+          <InputField
+            label="Senha"
+            type="password"
+            onChange={event => setPassword(event.target.value)}
+            value={password}
+          />
+
+          {loading ? (
+            <div class="spinner-border text-danger" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          ) : (
+            <Button title="Cadastrar" className="btnRegister" onClick={handleRegister} />
+          )}
+
+          <div className="text-black text-center fw-semibold my-5">
+            {messageType === 'success' && (
+              <span className="alert alert-success" role="alert">
+                <strong>WoW!</strong> Usuário cadastrado com sucesso!{' '}
+              </span>
+            )}
+            {messageType === 'erro' && (
+              <span className="alert alert-danger" role="alert">
+                <strong>Ops!</strong> {message}!{' '}
+              </span>
+            )}
           </div>
-        ) : (
-          <Button title="Cadastrar" onClick={handleRegister} />
-        )}
-
-        <div className="text-black text-center fw-semibold my-3">
-          {messageType === 'success' && (
-            <span className="alert alert-success" role="alert">
-              <strong>WoW!</strong> Usuário cadastrado com sucesso!{' '}
-            </span>
-          )}
-          {messageType === 'erro' && (
-            <span className="alert alert-danger" role="alert">
-              <strong>Ops!</strong> {message}!{' '}
-            </span>
-          )}
-        </div>
-      </form>
-    </FormControl>
+        </form>
+      </FormControl>
+    </>
   )
 }
