@@ -1,6 +1,4 @@
 .buttonHero {
-  background-color: var(--white);
-  color: var(--indigo-800);
   font-size: 1.25rem;
   width: 25rem;
 
@@ -8,9 +6,6 @@
 }
 
 .buttonHero:hover {
-  background-color: var(--rose-700);
-  color: var(--white);
-
   transform: scale(101%);
 }
 

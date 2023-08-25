@@ -53,7 +53,7 @@ export function Register() {
     <>
       <NavBar />
 
-      <FormControl>
+      <FormControl background={'var(--indigo-50)'}>
         <form className="formRegister text-center d-flex flex-column justify-content-center align-items-center mx-auto">
           <h1 className="h3 mb-3 fw-bold display-6 text-dark">Cadastro</h1>
 
@@ -76,7 +76,12 @@ export function Register() {
               <span class="visually-hidden">Loading...</span>
             </div>
           ) : (
-            <Button title="Cadastrar" className="btnRegister" onClick={handleRegister} />
+            <Button
+              type="button"
+              title="Cadastrar"
+              className="buttonLight"
+              onClick={handleRegister}
+            />
           )}
 
           <div className="text-black text-center fw-semibold my-5">

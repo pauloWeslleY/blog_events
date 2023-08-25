@@ -8,9 +8,14 @@ export function Home() {
       <NavBar />
 
       <div className="homeContainer">
-        <h1>{useSelector(state => state.userEmail)}</h1>
+        <h1>Usuário: {useSelector(state => state.userEmail)}</h1>
         <h1>
-          Logado: {useSelector(state => state.userLogged) === true && <span>user logged</span>}
+          Logado:{' '}
+          {useSelector(state => state.userLogged) === true ? (
+            <span>user logged</span>
+          ) : (
+            <span>user not logged</span>
+          )}
         </h1>
       </div>
     </>

@@ -14,6 +14,26 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+.buttonLight {
+  background-color: var(--indigo-800);
+  color: var(--white);
+}
+
+.buttonLight:hover {
+  background-color: var(--pink-600);
+  color: var(--white);
+}
+
+.buttonDark {
+  background-color: var(--white);
+  color: var(--indigo-800);
+}
+
+.buttonDark:hover {
+  background-color: var(--rose-700);
+  color: var(--white);
+}
+
 :root {
   --purple-600: #614ea6;
 

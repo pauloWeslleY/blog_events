@@ -1,4 +1,4 @@
-import { FaBars } from 'react-icons/fa'
+import { FaBars, FaPaperPlane } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import { MENU_LINKS, MENU_LINKS_LOGIN } from './data/[menu_props]'
 import { NavItem } from './NavItem'
@@ -14,7 +14,11 @@ export const NavBar = () => {
   return (
     <nav className="navbar navbar-expand-lg border-bottom border-body" data-bs-theme="dark">
       <div className="container">
-        <span className="navbar-brand fw-semibold">Blog Events</span>
+        <span className="navbar-brand fw-semibold d-flex align-items-center gap-2">
+          <FaPaperPlane />
+          Blog Events
+        </span>
+
         <button
           className="navbar-toggler"
           type="button"
