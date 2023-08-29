@@ -4,15 +4,16 @@ import { MENU_LINKS, MENU_LINKS_LOGIN } from './data/[menu_props]'
 import { NavItem } from './NavItem'
 import './NavBar.css'
 
-export const NavBar = () => {
+export function NavBar() {
   const dispatch = useDispatch()
 
-  const handleLogout = () => {
-    dispatch({ type: 'LOGOUT' })
-  }
+  const handleLogout = () => dispatch({ type: 'LOGOUT' })
 
   return (
-    <nav className="navbar navbar-expand-lg border-bottom border-body" data-bs-theme="dark">
+    <nav
+      className="navbar navbar-expand-lg border-bottom border-body"
+      data-bs-theme="dark"
+    >
       <div className="container">
         <span className="navbar-brand fw-semibold d-flex align-items-center gap-2">
           <FaPaperPlane />

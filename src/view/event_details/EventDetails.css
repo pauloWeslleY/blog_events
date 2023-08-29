@@ -1,0 +1,19 @@
+.img-banner {
+  width: 100%;
+  min-height: 300px;
+  max-height: 350px;
+}
+
+.box-info {
+  background-color: var(--indigo-600);
+  color: var(--white);
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.box-info svg {
+  width: 2rem;
+  height: 2rem;
+}

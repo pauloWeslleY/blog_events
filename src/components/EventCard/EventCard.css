@@ -1,0 +1,40 @@
+.card {
+  border: none;
+  background-color: var(--violet-100);
+  color: var(--indigo-700);
+
+  box-shadow: 4px 2px 25px 1px var(--violet-300);
+}
+
+.card img {
+  object-fit: cover;
+  height: 10rem;
+  max-height: 200px;
+  min-width: 100%;
+}
+
+.card .card-footer {
+  border-top: none;
+  background-color: var(--violet-200);
+}
+
+.card .card-footer a {
+  background-color: var(--indigo-600);
+  color: var(--white);
+  font-size: 0.985rem;
+
+  transition: all 0.3s ease-in-out;
+}
+
+.card .card-footer a > svg {
+  font-size: 1.285rem;
+}
+
+.card .card-footer a:hover {
+  background-color: var(--rose-600);
+  transform: translateY(-2px);
+}
+
+.card .card-footer .card-icon {
+  color: var(--indigo-600);
+}

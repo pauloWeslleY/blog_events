@@ -1,0 +1,37 @@
+.input-search-bar {
+  position: relative;
+}
+
+.input-search-bar label {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  color: var(--indigo-600);
+  cursor: text;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+}
+
+.input-search {
+  background-color: transparent;
+  width: 100%;
+  padding: 0.195rem;
+  border: 0;
+  border-bottom: 2px solid var(--indigo-600);
+  outline: 0;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--violet-700);
+  transition: all 0.3s ease-in-out;
+}
+
+.input-search:focus,
+.input-search:valid {
+  border-bottom: 2px solid var(--violet-700);
+}
+.input-search:focus ~ label,
+.input-search:valid ~ label {
+  transform: translateY(-35px);
+  font-size: 0.675rem;
+  color: var(--violet-700);
+}

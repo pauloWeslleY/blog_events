@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../config/firebase'
-import { Button } from '../../components/Button/Button'
-import { InputField } from '../../components/InputField/InputField'
-import { FormControl } from '../../components/FormControl/FormControl'
-import { NavBar } from '../../components/NavBar/NavBar'
-import './register.css'
+import { Button } from '../../components/Button'
+import { InputField } from '../../components/InputField'
+import { FormControl } from '../../components/FormControl'
+import { NavBar } from '../../components/NavBar'
+import { SpinnerLoading } from '../../components/SpinnerLoading'
 
 export function Register() {
   const [email, setEmail] = useState('')
@@ -43,7 +43,9 @@ export function Register() {
             setMessage('Email invalido')
             break
           default:
-            setMessage('Não foi possível realizar o cadastro. Tente mais tarde!')
+            setMessage(
+              'Não foi possível realizar o cadastro. Tente mais tarde!'
+            )
             break
         }
       })
@@ -53,7 +55,7 @@ export function Register() {
     <>
       <NavBar />
 
-      <FormControl background={'var(--indigo-50)'}>
+      <FormControl background="var(--indigo-50)">
         <form className="formRegister text-center d-flex flex-column justify-content-center align-items-center mx-auto">
           <h1 className="h3 mb-3 fw-bold display-6 text-dark">Cadastro</h1>
 
@@ -72,14 +74,12 @@ export function Register() {
           />
 
           {loading ? (
-            <div class="spinner-border text-danger" role="status">
-              <span class="visually-hidden">Loading...</span>
-            </div>
+            <SpinnerLoading label="Loading..." className="text-danger" />
           ) : (
             <Button
               type="button"
               title="Cadastrar"
-              className="buttonLight"
+              className="button-light"
               onClick={handleRegister}
             />
           )}

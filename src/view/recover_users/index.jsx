@@ -1,11 +1,10 @@
 import { useState } from 'react'
 import { sendPasswordResetEmail } from 'firebase/auth'
-import { NavBar } from '../../components/NavBar/NavBar'
-import { InputField } from '../../components/InputField/InputField'
-import { FormControl } from '../../components/FormControl/FormControl'
-import { Button } from '../../components/Button/Button'
-import './RecoveUser.css'
-import { AlertHero } from '../../components/AlertHero/AlertHero'
+import { NavBar } from '../../components/NavBar'
+import { InputField } from '../../components/InputField'
+import { FormControl } from '../../components/FormControl'
+import { Button } from '../../components/Button'
+import { AlertHero } from '../../components/AlertHero'
 import { auth } from '../../config/firebase'
 
 export function RecoverUsers() {
@@ -27,7 +26,7 @@ export function RecoverUsers() {
     <>
       <NavBar />
 
-      <FormControl background={'var(--indigo-50)'}>
+      <FormControl background="var(--indigo-50)">
         <form className="container d-flex flex-column justify-content-center align-items-center">
           <h2 className="h3 fw-bold display-6 mb-3">Recuperar Senha</h2>
 
@@ -38,7 +37,11 @@ export function RecoverUsers() {
             onChange={event => setEmail(event.target.value)}
           />
 
-          <Button title="Enviar" className="buttonLight" onClick={recoverPassword} />
+          <Button
+            title="Enviar"
+            className="buttonLight"
+            onClick={recoverPassword}
+          />
 
           <div className="mt-5">
             {message && <AlertHero title={message} status="alert-warning" />}

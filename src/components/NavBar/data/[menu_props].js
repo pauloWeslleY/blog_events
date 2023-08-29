@@ -12,10 +12,10 @@ export const MENU_LINKS = [
 export const MENU_LINKS_LOGIN = [
   {
     label: 'Publicar Eventos',
-    path: '/register_events',
+    path: '/create_events',
   },
   {
     label: 'Meus Eventos',
-    path: '/',
+    path: '/events/',
   },
 ]

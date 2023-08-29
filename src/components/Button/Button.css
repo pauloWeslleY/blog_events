@@ -1,16 +1,16 @@
-.buttonHero {
+.button-hero {
   font-size: 1.25rem;
   width: 25rem;
 
   transition: all 0.3s ease-in;
 }
 
-.buttonHero:hover {
+.button-hero:hover {
   transform: scale(101%);
 }
 
 @media only screen and (max-width: 425px) {
-  .buttonHero {
+  .button-hero {
     width: 100%;
   }
 }
