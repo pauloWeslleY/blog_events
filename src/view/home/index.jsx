@@ -1,22 +1,14 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
 import { collection, getDocs, orderBy, query, where } from 'firebase/firestore'
-import { useSelector } from 'react-redux'
 import { db } from '../../config/firebase'
 import { NavBar } from '../../components/NavBar'
 import { EventCard } from '../../components/EventCard'
 import { InputSearchBar } from '../../components/InputSearchBar'
-import { useAuth } from '../../hooks/useAuth'
 
 export function Home() {
   const [events, setEvents] = useState([])
   const [searchEvent, setSearchEvent] = useState('')
   const eventsCollectionRef = collection(db, 'events')
-  const user = useSelector(state => state.userEmail)
-  const { id } = useParams()
-  const { userEvents } = useAuth()
-
-  const filterUserEvents = userEvents.find(event => event.id === id)
   const filterEvents = events.filter(props => props.title.includes(searchEvent))
 
   async function getEvents() {
@@ -35,25 +27,9 @@ export function Home() {
     setEvents(isEvents)
   }
 
-  async function getEventsByUsers() {
-    const filteredEvents = query(eventsCollectionRef, where('user', '==', user))
-
-    const querySnapshot = await getDocs(filteredEvents)
-    const isEvents = querySnapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data(),
-    }))
-
-    setEvents(isEvents)
-  }
-
   useEffect(() => {
     getEvents()
   }, [])
-
-  // if (!filterUserEvents) {
-  //   return <h2> Event not found!</h2>
-  // }
 
   return (
     <>

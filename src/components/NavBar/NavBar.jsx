@@ -6,12 +6,13 @@ import './NavBar.css'
 
 export function NavBar() {
   const dispatch = useDispatch()
+  const userEmail = useSelector(state => state.userEmail)
 
   const handleLogout = () => dispatch({ type: 'LOGOUT' })
 
   return (
     <nav
-      className="navbar navbar-expand-lg border-bottom border-body"
+      className="navbar navbar-expand-lg border-bottom border-body sticky-top"
       data-bs-theme="dark"
     >
       <div className="container">
@@ -32,7 +33,7 @@ export function NavBar() {
           <FaBars />
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
+          <ul className="navbar-nav me-auto">
             <NavItem label="Home" path="/" />
 
             {useSelector(state => state.userLogged) ? (
@@ -51,6 +52,9 @@ export function NavBar() {
               </>
             )}
           </ul>
+          <span className="navbar-text">
+            Navbar text with an inline element
+          </span>
         </div>
       </div>
     </nav>

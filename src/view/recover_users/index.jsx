@@ -13,7 +13,7 @@ export function RecoverUsers() {
 
   function recoverPassword() {
     sendPasswordResetEmail(auth, email)
-      .then(result => {
+      .then(() => {
         setMessage('Enviamos um link no seu email para redefinir sua senha')
       })
       .catch(err => {

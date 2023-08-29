@@ -25,7 +25,7 @@ export function Register() {
     }
 
     await createUserWithEmailAndPassword(auth, email, password)
-      .then(result => {
+      .then(() => {
         setLoading(false)
         setMessageType('success')
       })

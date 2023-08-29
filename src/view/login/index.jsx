@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import { signInWithEmailAndPassword } from 'firebase/auth'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { FaPaperPlane } from 'react-icons/fa'
 import { auth } from '../../config/firebase'
 import { AlertHero } from '../../components/AlertHero'
@@ -9,12 +9,13 @@ import { InputField } from '../../components/InputField'
 import { Button } from '../../components/Button'
 import { BtnLink } from '../../components/BtnLink'
 import { FormControl } from '../../components/FormControl'
+import { useLoggedByEmail } from '../../hooks/useLoggedByEmail'
 
 export function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [message, setMessage] = useState('')
-
+  const { userLogged } = useLoggedByEmail()
   const dispatch = useDispatch()
 
   async function SignIn() {
@@ -33,7 +34,7 @@ export function Login() {
 
   return (
     <FormControl background="var(--indigo-700)">
-      {useSelector(state => state.userLogged) ? <Navigate to="/" /> : null}
+      {userLogged ? <Navigate to="/" /> : null}
 
       <form className="d-flex flex-column justify-content-center align-items-center mx-auto text-center">
         <div className="d-flex flex-column align-items-center text-white">
