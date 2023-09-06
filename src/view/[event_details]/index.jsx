@@ -1,14 +1,19 @@
+import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { doc, updateDoc } from 'firebase/firestore'
 import { FaCalendarAlt, FaTicketAlt } from 'react-icons/fa'
 import { FiEdit2 } from 'react-icons/fi'
 import { ImClock2 } from 'react-icons/im'
+import { BsFillEyeFill } from 'react-icons/bs'
 import { useLoggedByEmail } from '../../hooks/useLoggedByEmail'
 import { NavBar } from '../../components/NavBar'
+import { SpinnerLoading } from '../../components/SpinnerLoading/SpinnerLoading'
+import { db } from '../../config/firebase'
 import './EventDetails.css'
 
-export function EventDetails({ event }) {
-  const params = useParams()
+export function EventDetails({ event, loading }) {
   const { userEmail } = useLoggedByEmail()
+  const params = useParams()
   const filteredEvent = event.filter(item => item.id === params.id)
 
   let filteredEventById = {
@@ -20,6 +25,7 @@ export function EventDetails({ event }) {
     user: filteredEvent?.user,
     date: filteredEvent?.date,
     hours: filteredEvent?.hours,
+    views: filteredEvent?.views,
   }
 
   filteredEvent.map(item => {
@@ -32,10 +38,37 @@ export function EventDetails({ event }) {
       user: item.user,
       date: item.date,
       hours: item.hours,
+      views: item.views,
     }
 
     return filteredEventById
   })
+
+  useEffect(() => {
+    async function handleUpdateViews() {
+      const eventsRef = doc(db, 'events', filteredEventById.id)
+      await updateDoc(eventsRef, {
+        views: filteredEventById.views + 1,
+      })
+    }
+
+    return () => {
+      handleUpdateViews()
+    }
+  }, [])
+
+  if (loading) {
+    return (
+      <>
+        <NavBar />
+
+        <div className="d-flex justify-content-center align-items-center gap-2 my-5">
+          <SpinnerLoading label="Carregando..." className="text-secondary" />
+          <span className="fw-semibold text-secondary">Carregando...</span>
+        </div>
+      </>
+    )
+  }
 
   return (
     <>
@@ -87,8 +120,15 @@ export function EventDetails({ event }) {
               <strong>Detalhes do Evento</strong>
             </h5>
 
+            <div className="d-flex justify-content-center">
+              <p className="d-flex align-items-center gap-1 text-body-tertiary">
+                visualizações: <BsFillEyeFill />
+                <span className="fw-semibold">{filteredEventById.views}</span>
+              </p>
+            </div>
+
             <p className="text-center fw-medium p-3">
-              {filteredEventById.details}
+              {filteredEventById.details + 1}
             </p>
           </div>
 
@@ -104,7 +144,7 @@ export function EventDetails({ event }) {
           </div>
 
           {userEmail === filteredEventById.user && (
-            <Link to="/" className="btn button-edit">
+            <Link to={`/edit_event/${params.id}`} className="btn button-edit">
               <FiEdit2 />
             </Link>
           )}

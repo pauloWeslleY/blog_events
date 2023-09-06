@@ -1,5 +1,3 @@
-import './Button.css'
-
 export function Button({ title, className, type, onClick }) {
   return (
     <button

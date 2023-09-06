@@ -1,12 +1,12 @@
+main .title-event-details {
+  color: var(--indigo-600);
+}
+
 .img-banner {
   width: 100%;
   min-height: 300px;
-  max-height: 45rem;
+  max-height: 35rem;
   object-fit: cover;
-}
-
-main .title-event-details {
-  color: var(--indigo-600);
 }
 
 .box-info {

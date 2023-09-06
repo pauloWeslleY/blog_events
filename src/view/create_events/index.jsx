@@ -2,13 +2,14 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { addDoc, collection } from 'firebase/firestore'
+import { useParams } from 'react-router-dom'
 import { db, storage } from '../../config/firebase'
 import { AlertHero } from '../../components/AlertHero'
 import { Button } from '../../components/Button'
 import { NavBar } from '../../components/NavBar'
 import { SpinnerLoading } from '../../components/SpinnerLoading'
 
-export function CreateEvents() {
+export function CreateEvents(props) {
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
   const [title, setTitle] = useState('')
@@ -18,6 +19,7 @@ export function CreateEvents() {
   const [hours, setHours] = useState('')
   const [image, setImage] = useState('')
   const eventsRef = collection(db, 'events')
+  const params = useParams()
 
   const createEvents = {
     title,
@@ -77,7 +79,7 @@ export function CreateEvents() {
         <div className="col-12">
           <div className="row">
             <h1 className="fw-semibold text-center text-secondary display-5 h2 mt-5">
-              Novo Evento
+              {params.id ? 'Atualizar Evento' : 'Novo Evento'}
             </h1>
           </div>
 
@@ -190,7 +192,7 @@ export function CreateEvents() {
               ) : (
                 <Button
                   type="submit"
-                  title="Publicar Evento"
+                  title={params.id ? 'Atualizar Evento' : 'Publicar Evento'}
                   className="button-light"
                   onClick={handleCreateEvents}
                 />

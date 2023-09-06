@@ -7,11 +7,12 @@ import { Register } from '../view/register'
 import { Home } from '../view/home'
 import { RecoverUsers } from '../view/recover_users'
 import { CreateEvents } from '../view/create_events'
-import { EventDetails } from '../view/event_details'
+import { EventDetails } from '../view/[event_details]'
 import { db } from '../config/firebase'
 
 export function AppRoute() {
   const [events, setEvents] = useState([])
+  const [loading, setLoading] = useState(true)
   const eventsCollectionRef = collection(db, 'events')
 
   async function getEventsAll() {
@@ -27,6 +28,7 @@ export function AppRoute() {
     }))
 
     setEvents(isEvents)
+    setLoading(false)
   }
 
   const data = useMemo(() => {
@@ -39,6 +41,7 @@ export function AppRoute() {
       user: props.user,
       date: props.date,
       hours: props.hours,
+      views: props.views,
     }))
 
     return dataEvent
@@ -58,9 +61,10 @@ export function AppRoute() {
           <Route path="/register" element={<Register />} />
           <Route path="/recover" element={<RecoverUsers />} />
           <Route path="/create_events" element={<CreateEvents />} />
+          <Route path="/edit_event/:id" element={<CreateEvents />} />
           <Route
             path="/event_details/:id"
-            element={<EventDetails event={data} />}
+            element={<EventDetails event={data} loading={loading} />}
           />
         </Route>
       </Routes>

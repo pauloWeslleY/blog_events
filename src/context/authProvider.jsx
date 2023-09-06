@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux'
 export const AuthContext = createContext()
 
 export function AuthProvider({ children }) {
-  const userLogged = useSelector(state => state.userEmail)
   const [user, setUser] = useState(null) // Usuário logado (ou null se não estiver logado)
   const [userEvents, setUserEvents] = useState([]) // Eventos do usuário logado
 

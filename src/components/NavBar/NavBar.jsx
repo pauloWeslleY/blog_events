@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { MENU_LINKS, MENU_LINKS_LOGIN } from './data/[menu_props]'
 import { NavItem } from './NavItem'
 import './NavBar.css'
+import { useLoggedByEmail } from '../../hooks/useLoggedByEmail'
 
 export function NavBar() {
   const dispatch = useDispatch()
-  const userEmail = useSelector(state => state.userEmail)
+  const { userEmail, userLogged } = useLoggedByEmail()
 
   const handleLogout = () => dispatch({ type: 'LOGOUT' })
 
@@ -36,7 +37,7 @@ export function NavBar() {
           <ul className="navbar-nav me-auto">
             <NavItem label="Home" path="/" />
 
-            {useSelector(state => state.userLogged) ? (
+            {userLogged ? (
               <>
                 {MENU_LINKS_LOGIN.map((props, index) => (
                   <NavItem key={index} label={props.label} path={props.path} />
@@ -52,9 +53,7 @@ export function NavBar() {
               </>
             )}
           </ul>
-          <span className="navbar-text">
-            Navbar text with an inline element
-          </span>
+          <span className="navbar-text">{userLogged && userEmail}</span>
         </div>
       </div>
     </nav>
