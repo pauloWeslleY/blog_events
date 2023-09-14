@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { addDoc, collection } from 'firebase/firestore'
@@ -8,18 +8,35 @@ import { AlertHero } from '../../components/AlertHero'
 import { Button } from '../../components/Button'
 import { NavBar } from '../../components/NavBar'
 import { SpinnerLoading } from '../../components/SpinnerLoading'
+import { useGetEvents } from '../../hooks/useGetEvents'
+import { useFilteredEvents } from '../../hooks/useFilteredEvents'
 
-export function CreateEvents(props) {
-  const [loading, setLoading] = useState(false)
-  const [message, setMessage] = useState('')
+export function FormEventsHero() {
   const [title, setTitle] = useState('')
   const [details, setDetails] = useState('')
   const [type, setType] = useState('')
   const [data, setData] = useState('')
   const [hours, setHours] = useState('')
-  const [image, setImage] = useState('')
-  const eventsRef = collection(db, 'events')
   const params = useParams()
+  const { handleCreateEvent, handleImageChange, dataEvent, loading, message } =
+    useGetEvents()
+  const { updatedEventById } = useFilteredEvents(params.id, dataEvent)
+
+  useEffect(() => {
+    if (params.id) {
+      setTitle(updatedEventById.title)
+      setDetails(updatedEventById.details)
+      setType(updatedEventById.type)
+      setData(updatedEventById.date)
+      setHours(updatedEventById.hours)
+    } else {
+      setTitle('')
+      setDetails('')
+      setType('')
+      setData('')
+      setHours('')
+    }
+  }, [params])
 
   const createEvents = {
     title,
@@ -35,40 +52,14 @@ export function CreateEvents(props) {
     user: useSelector(state => state.userEmail),
   }
 
-  function handleImageChange(event) {
-    if (event.target.files) {
-      setImage(event.target.files[0])
-    }
-  }
-
-  async function handleCreateEvents(event) {
+  async function handleCreatedEvent(event) {
     event.preventDefault()
-    setMessage(null)
-    setLoading(true)
-
-    if (image) {
-      const storageRef = ref(storage, `images/${title}/${image.name}`)
-      uploadBytes(storageRef, image)
-        .then(async snapshot => {
-          await getDownloadURL(snapshot.ref).then(async downloadURL => {
-            createEvents.photoUrl = downloadURL
-
-            await addDoc(eventsRef, createEvents)
-              .then(() => {
-                setMessage('success')
-                setLoading(false)
-              })
-              .catch(err => {
-                console.log('Erro ==> ', err)
-                setMessage('erro')
-              })
-          })
-        })
-        .catch(err => {
-          setMessage('erro')
-          console.log(err)
-        })
-    }
+    await handleCreateEvent(createEvents)
+    setTitle('')
+    setDetails('')
+    setType('')
+    setData('')
+    setHours('')
   }
 
   return (
@@ -129,9 +120,10 @@ export function CreateEvents(props) {
                       className="form-control form-select"
                       aria-label="Select type events"
                       onChange={event => setType(event.target.value)}
-                      defaultValue="0"
+                      value={params.id ? type : ''}
+                      defaultValue={params.id ? type : ''}
                     >
-                      <option disabled value="0">
+                      <option disabled value="">
                         -- Selecione um tipo --
                       </option>
                       <option value="festa">Festa</option>
@@ -194,7 +186,7 @@ export function CreateEvents(props) {
                   type="submit"
                   title={params.id ? 'Atualizar Evento' : 'Publicar Evento'}
                   className="button-light"
-                  onClick={handleCreateEvents}
+                  onClick={handleCreatedEvent}
                 />
               )}
             </div>

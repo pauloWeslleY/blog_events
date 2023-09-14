@@ -9,12 +9,14 @@ import { useLoggedByEmail } from '../../hooks/useLoggedByEmail'
 import { NavBar } from '../../components/NavBar'
 import { SpinnerLoading } from '../../components/SpinnerLoading/SpinnerLoading'
 import { db } from '../../config/firebase'
+import { useGetEvents } from '../../hooks/useGetEvents'
 import './EventDetails.css'
 
-export function EventDetails({ event, loading }) {
-  const { userEmail } = useLoggedByEmail()
+export function EventDetails() {
   const params = useParams()
-  const filteredEvent = event.filter(item => item.id === params.id)
+  const { userEmail } = useLoggedByEmail()
+  const { dataEvent, loading } = useGetEvents()
+  const filteredEvent = dataEvent?.filter(item => item.id === params.id)
 
   let filteredEventById = {
     id: filteredEvent?.id,
@@ -28,7 +30,7 @@ export function EventDetails({ event, loading }) {
     views: filteredEvent?.views,
   }
 
-  filteredEvent.map(item => {
+  filteredEvent?.map(item => {
     filteredEventById = {
       id: item.id,
       title: item.title,
