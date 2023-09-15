@@ -18,13 +18,14 @@ import { db, storage } from '../config/firebase'
 export function EventProvider({ children }) {
   const [events, setEvents] = useState([])
   const [image, setImage] = useState('')
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
   const eventsCollectionRef = collection(db, 'events')
   const navigate = useNavigate()
 
   useEffect(() => {
     async function getEventsAll() {
+      setLoading(true)
       const filteredEvents = query(
         eventsCollectionRef,
         where('title', '!=', true),

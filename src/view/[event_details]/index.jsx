@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { doc, updateDoc } from 'firebase/firestore'
 import { FaCalendarAlt, FaTicketAlt } from 'react-icons/fa'
@@ -15,15 +15,24 @@ import './EventDetails.css'
 export function EventDetails() {
   const params = useParams()
   const { userEmail } = useLoggedByEmail()
-  const { dataEvent, loading } = useGetEvents()
+  const { dataEvent } = useGetEvents()
   const { filteredEventById } = useFilteredEvents(params.id, dataEvent)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     async function handleUpdateViews() {
+      setLoading(true)
       const eventsRef = doc(db, 'events', filteredEventById.id)
       await updateDoc(eventsRef, {
         views: filteredEventById.views + 1,
       })
+        .then(() => {
+          setLoading(false)
+        })
+        .catch(err => {
+          setLoading(true)
+          console.log(err)
+        })
     }
 
     return () => {

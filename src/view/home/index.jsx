@@ -3,13 +3,18 @@ import { useParams } from 'react-router-dom'
 import { InputSearchBar } from '../../components/InputSearchBar'
 import { EventCard } from '../../components/EventCard'
 import { useGetEvents } from '../../hooks/useGetEvents'
+import { SpinnerLoading } from '../../components/SpinnerLoading/SpinnerLoading'
 
 export function Home() {
   const [searchEvent, setSearchEvent] = useState('')
-  const { events } = useGetEvents()
+  const { events, loading } = useGetEvents()
   const params = useParams()
   const filterEvents = events.filter(props => props.title.includes(searchEvent))
   const eventsMyUser = filterEvents.filter(props => props.user === params.id)
+
+  if (loading) {
+    return <SpinnerLoading label="carregando" className="text-secondary" />
+  }
 
   return (
     <main className="container">
