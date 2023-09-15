@@ -15,7 +15,7 @@ export function Home() {
     <main className="container">
       <div className="row mt-3 mb-2">
         <h2 className="display-6 fw-medium text-muted text-center">
-          {params.id ? 'Meus Eventos' : 'Eventos'}
+          {params.id ? 'Meus Eventos' : 'Eventos Publicados'}
         </h2>
       </div>
 
@@ -38,30 +38,6 @@ export function Home() {
             ))}
           </section>
         )}
-      </div>
-
-      <div className="toast-container position-fixed bottom-0 end-0 p-3">
-        <div
-          id="toastDelete"
-          className="toast"
-          role="alert"
-          aria-live="assertive"
-          aria-atomic="true"
-        >
-          <div className="toast-header">
-            <strong className="me-auto">Bootstrap</strong>
-            <small>11 mins ago</small>
-            <button
-              type="button"
-              className="btn-close"
-              data-bs-dismiss="toast"
-              aria-label="Close"
-            />
-          </div>
-          <div className="toast-body">
-            Hello, world! This is a toast message.
-          </div>
-        </div>
       </div>
     </main>
   )

@@ -9,13 +9,13 @@ import { useLoggedByEmail } from '../../hooks/useLoggedByEmail'
 import { SpinnerLoading } from '../../components/SpinnerLoading/SpinnerLoading'
 import { db } from '../../config/firebase'
 import { useGetEvents } from '../../hooks/useGetEvents'
-import './EventDetails.css'
 import { useFilteredEvents } from '../../hooks/useFilteredEvents'
+import './EventDetails.css'
 
 export function EventDetails() {
   const params = useParams()
   const { userEmail } = useLoggedByEmail()
-  const { dataEvent, loading, handleDeleteEvent } = useGetEvents()
+  const { dataEvent, loading } = useGetEvents()
   const { filteredEventById } = useFilteredEvents(params.id, dataEvent)
 
   useEffect(() => {

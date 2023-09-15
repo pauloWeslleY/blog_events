@@ -27,6 +27,7 @@
     "object-curly-newline": "off",
     "function-paren-newline": "off",
     "implicit-arrow-linebreak": "off",
+    "import/no-extraneous-dependencies": "off",
     "operator-linebreak": "off",
     "linebreak-style": "off",
     "no-console": "off",

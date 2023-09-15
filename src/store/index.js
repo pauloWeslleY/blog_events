@@ -1,4 +1,15 @@
 import { createStore } from 'redux'
+import { persistReducer, persistStore } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
 import { usersReducer } from './reducer'
 
-export const store = createStore(usersReducer)
+const persistConfig = {
+  key: 'blogevents',
+  storage,
+}
+
+const persistedReducer = persistReducer(persistConfig, usersReducer)
+const store = createStore(persistedReducer)
+const persist = persistStore(store)
+
+export { store, persist }
