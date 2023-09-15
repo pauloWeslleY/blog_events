@@ -1,9 +1,14 @@
 import { Link } from 'react-router-dom'
 import { HiOutlinePlusSm } from 'react-icons/hi'
 import { BsFillEyeFill } from 'react-icons/bs'
+import { useGetEvents } from '../../hooks/useGetEvents'
+import { useLoggedByEmail } from '../../hooks/useLoggedByEmail'
 import './EventCard.css'
 
-export function EventCard({ id, title, photoUrl, details, views }) {
+export function EventCard({ id, title, photoUrl, details, views, user }) {
+  const { handleDeleteEvent } = useGetEvents()
+  const { userEmail } = useLoggedByEmail()
+
   return (
     <article className="col-md-3 col-sm-12 my-2">
       <div className="card h-100">
@@ -18,8 +23,17 @@ export function EventCard({ id, title, photoUrl, details, views }) {
             className="btn fw-semibold d-flex align-items-center gap-1"
           >
             <HiOutlinePlusSm />
-            details
+            detalhes
           </Link>
+
+          {userEmail === user && (
+            <button
+              className="btn btn-danger fw-light"
+              onClick={() => handleDeleteEvent(id)}
+            >
+              excluir
+            </button>
+          )}
 
           <div className="card-icon d-flex align-items-center gap-2">
             <BsFillEyeFill />

@@ -8,14 +8,3 @@ export const MENU_LINKS = [
     path: '/login',
   },
 ]
-
-export const MENU_LINKS_LOGIN = [
-  {
-    label: 'Publicar Eventos',
-    path: '/create_events',
-  },
-  {
-    label: 'Meus Eventos',
-    path: '/events/',
-  },
-]

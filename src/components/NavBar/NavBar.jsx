@@ -1,14 +1,13 @@
 import { FaBars, FaPaperPlane } from 'react-icons/fa'
-import { useDispatch, useSelector } from 'react-redux'
-import { MENU_LINKS, MENU_LINKS_LOGIN } from './data/[menu_props]'
+import { useDispatch } from 'react-redux'
+import { MENU_LINKS } from './data/[menu_props]'
+import { useLoggedByEmail } from '../../hooks/useLoggedByEmail'
 import { NavItem } from './NavItem'
 import './NavBar.css'
-import { useLoggedByEmail } from '../../hooks/useLoggedByEmail'
 
 export function NavBar() {
-  const dispatch = useDispatch()
   const { userEmail, userLogged } = useLoggedByEmail()
-
+  const dispatch = useDispatch()
   const handleLogout = () => dispatch({ type: 'LOGOUT' })
 
   return (
@@ -39,10 +38,8 @@ export function NavBar() {
 
             {userLogged ? (
               <>
-                {MENU_LINKS_LOGIN.map((props, index) => (
-                  <NavItem key={index} label={props.label} path={props.path} />
-                ))}
-
+                <NavItem label="Publicar Eventos" path="/create_events" />
+                <NavItem label="Meus Eventos" path={`/events/${userEmail}`} />
                 <NavItem label="Sair" onClick={handleLogout} />
               </>
             ) : (

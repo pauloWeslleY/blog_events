@@ -11,10 +11,10 @@ export function AppRoute() {
   return (
     <Router>
       <Routes>
+        <Route path="/login" element={<Login />} />
         <Route path="/" element={<App />}>
           <Route path="/" element={<Home />} />
           <Route path="/events/:id" element={<Home />} />
-          <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/recover" element={<RecoverUsers />} />
           <Route path="/create_events" element={<FormEventsHero />} />

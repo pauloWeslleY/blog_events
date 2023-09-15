@@ -1,20 +1,20 @@
 export function useFilteredEvents(id, dataEvent) {
-  const updatedEvent = dataEvent?.filter(item => item.id === id)
+  const eventByID = dataEvent?.filter(item => item.id === id)
 
-  let updatedEventById = {
-    id: updatedEvent?.id,
-    title: updatedEvent?.title,
-    details: updatedEvent?.details,
-    photoUrl: updatedEvent?.photoUrl,
-    type: updatedEvent?.type,
-    user: updatedEvent?.user,
-    date: updatedEvent?.date,
-    hours: updatedEvent?.hours,
-    views: updatedEvent?.views,
+  let filteredEventById = {
+    id: eventByID?.id,
+    title: eventByID?.title,
+    details: eventByID?.details,
+    photoUrl: eventByID?.photoUrl,
+    type: eventByID?.type,
+    user: eventByID?.user,
+    date: eventByID?.date,
+    hours: eventByID?.hours,
+    views: eventByID?.views,
   }
 
-  updatedEvent?.map(item => {
-    updatedEventById = {
+  eventByID?.map(item => {
+    filteredEventById = {
       id: item.id,
       title: item.title,
       details: item.details,
@@ -26,8 +26,8 @@ export function useFilteredEvents(id, dataEvent) {
       views: item.views,
     }
 
-    return updatedEventById
+    return filteredEventById
   })
 
-  return { updatedEventById }
+  return { filteredEventById }
 }
